@@ -5,7 +5,7 @@ import numpy as np
 
 
 class SpinConfig():
-    """Define a class of spin configuration with site number N.
+    """Create a class of 2-d spin list with site number N.
 
     Parameters
     ----------
@@ -25,9 +25,6 @@ class SpinConfig():
     >>> myspin.iMax
     16
     """
-
-
-
     def __init__(self, N=0):
         self.N = N
         self.iMax = 2**self.N
