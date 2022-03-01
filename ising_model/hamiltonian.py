@@ -50,10 +50,10 @@ class Hamiltonian():
         -4.9
         """
         self.spinconfig = spinconfig
+
         E = 0
-        """ Energy from the external field:
-        H_external = Sum over i of u * spin[i]
-        """
+        #Energy from the external field:
+        #H_external = Sum over i of u * spin[i]
         for eachspin in self.spinconfig:
             if eachspin == 1:
                 E += self.u * 1
@@ -62,9 +62,9 @@ class Hamiltonian():
             else:
                 print("Spin input error")
 
-        """Energy from coupling the nearest neighbor spin:
-        H_c = -J/k * spin[i] * spin[i+1]
-        """
+        #Energy from coupling the nearest neighbor spin:
+        #H_c = -J/k * spin[i] * spin[i+1]
+        
         newList = self.spinconfig[1:]
         newList.append(self.spinconfig[0])
         for spinx, spiny in zip(self.spinconfig, newList):

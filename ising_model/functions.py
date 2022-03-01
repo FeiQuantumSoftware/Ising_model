@@ -1,6 +1,4 @@
 """Provide the primary functions."""
-
-
 from math import exp
 
 
