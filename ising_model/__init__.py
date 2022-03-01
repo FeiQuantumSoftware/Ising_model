@@ -2,6 +2,8 @@
 
 # Add imports here
 from .functions import *
+from .hamiltonian import Hamiltonian
+from .spinconfig import SpinConfig
 
 # Handle versioneer
 from ._version import get_versions

@@ -1,20 +1,55 @@
 """def spin configuration class"""
+
+from math import exp
+import numpy as np
+
+
 class SpinConfig():
+    """Define a class of spin configuration with site number N.
+
+    Parameters
+    ----------
+    N: integer , optional
+        The total site number of a spin list.
+
+    Returns
+    -------
+    SpinConfig : class
+        A class of spin with site number N, with total possible spin configuration iMax = 2**N
+
+    Examples
+    --------
+    >>> myspin = SpinConfig(4)
+    >>> myspin.N
+    4
+    >>> myspin.iMax
+    16
+    """
+
+
 
     def __init__(self, N=0):
-        """N = total spin_number"""
         self.N = N
         self.iMax = 2**self.N
 
     def input_decimal(self, decimal_Input):
-        """initialize spin configuration when input is decimal.
-        Input 
-        -----------
-        Enteger that decimal of a binary number '10110001' that represent a spin configuration
-        Example: input_decimal(5)
-                 return: [1,0,1]
-        -----------
-        Return: binary list in 0 and 1
+        """Initialize spin configuration for decimal input.
+        
+        Parameters
+        ----------
+        decimal_Input : integar
+            The decimal number of a binary spinlist. 
+
+        Returns
+        -------
+        self.config : list
+            A spin list represented in '0':spin down, and '1' : spin up.
+
+        Examples
+        --------
+        >>> myspin = SpinConfig(8)
+        >>> myspin.input_decimal(6)
+        [0, 0, 0, 0, 0, 1, 1, 0]
         """
         spinlist = []
         for element in bin(decimal_Input)[2:]:
@@ -27,16 +62,26 @@ class SpinConfig():
 
         return self.config
 
+
+
     def input_p_m(self, p_m_Input):
-        """Initialize spin configuration when input is decimal.
-
-        Parameters 
+        """Initialize spin configuration for decimal input.
+        
+        Parameters
         ----------
-            p_m_Input: string
+        p_m_Input: string
+            A spin list represented in '+': spin up, and '-': spin down.
 
-        Return
-        -----------
-            list (in 0 and 1)
+        Returns
+        -------
+        spinlist2 : list
+            A spin list represented in '0':spin down, and '1' : spin up.
+
+        Examples
+        --------
+        >>> myspin = SpinConfig()
+        >>> myspin.input_p_m("++-+---+--+")
+        [1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1]
         """
         self.p_m_Input = p_m_Input
         spinlist2 = list()
@@ -52,8 +97,20 @@ class SpinConfig():
 
         return spinlist2
 
-    def magnetization(self):
 
+
+    def magnetization(self):
+        """Initialize spin configuration for decimal input.
+        
+        Parameters
+        ----------
+
+        Returns
+        -------
+
+        Examples
+        --------
+        """
         magnet = 0
         for eachspin in self.config:
             if eachspin == 1:

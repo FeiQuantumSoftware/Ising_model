@@ -1,24 +1,57 @@
 """coupling Hamiltonian class def"""
+from math import exp
+from .spinconfig import SpinConfig
+import numpy as np
 
 class Hamiltonian():
-    """Hamiltonian(J,miu)
-    Input:
+    """Create a class of Hamiltonian of 2-d Ising model.
+        
+    Parameters
+    ----------
+    J: float, optional
+        Coupling parameter, default J=-2 .
+    u: float, optional
+        External field strength, default u=1.1 .
+
+    Returns
+    -------
+    Hamiltonian: class
+        A Hamiltonian of a Ising model with J: coupling strength, u: external field factor.
+
+    Examples
     --------
-    (J: float; u=miu:float)
-
+    >>>ham = Hamiltonian(-2,1.1)
+    >>>ham. J
+    -2
     """
-
     def __init__(self, J=-2, u=1.1):
-
         self.u = u
         self.J = J
 
-    def energy(self, spinconfig):
 
+
+    def energy(self, spinconfig):
+         """Calculate the energy of a given spinconfiguration.
+        
+        Parameters
+        ----------
+        spinconfig : list
+            Spin configuration represented in '1': spin up, '0': spin down.
+
+        Returns
+        -------
+        energy : float
+            Total energy out from both the external filed and coupling from neighbor spins. 
+
+        Examples
+        --------
+        >>>ham = Hamiltonian(-2,1.1)
+        >>>ham. energy([0,1,0,1,1])
+        -4.9
+        """
         self.spinconfig = spinconfig
         E = 0
-        """
-        Energy from the external field:
+        """ Energy from the external field:
         H_external = Sum over i of u * spin[i]
         """
         for eachspin in self.spinconfig:
@@ -29,8 +62,7 @@ class Hamiltonian():
             else:
                 print("Spin input error")
 
-        """
-        Energy from coupling the nearest neighbor spin:
+        """Energy from coupling the nearest neighbor spin:
         H_c = -J/k * spin[i] * spin[i+1]
         """
         newList = self.spinconfig[1:]
@@ -45,18 +77,32 @@ class Hamiltonian():
 
         return E
 
+
+
     def average(self, T=1, N=0):
-        """Get average property of Ising model with N spins
-        Input 
-        -----------
-        Temperatur--Float, N_spin_site---Integer
-        eg. average(10,9)
+        """Calculate the oberservables of a given spin list with N sites.
+        
+        Parameters
+        ----------
+        T : float, optional
+            Temperature of the system.
+        N : interger, optional
+            The site number of a spin list. 
 
-        Return
-        -----------
-        E, m, C, ms   ---- Float
+        Returns
+        -------
+        E, m, C, ms : set
+            Average energy, average magnetism, heat capacibility, magnetic susceptbility.
+
+        Examples
+        --------
+        >>>ham = Hamiltonian(-2,1.1)
+        >>>ham. average(10, 4)
+        (-1.894905381126034,
+         -0.29386784002835087,
+         0.17850826588133842,
+         0.26682385808137565)
         """
-
         mySpin = SpinConfig(N)
 
         Zsum = 0
@@ -77,13 +123,15 @@ class Hamiltonian():
             m += Zi * mi
             mm += Zi * mi * mi
 
-        """Normalize over Zsum"""
+        # get average energy
         E = E/Zsum
         EE = EE/Zsum
+        #get average magnetism
         m = m/Zsum
         mm = mm/Zsum
-        # get capacity and magnetic susceptibility
+        # get capacity
         C = (EE - E**2)/(T*T)
+        # get magnetic susceptibility
         ms = (mm - m**2)/(T)
 
         return E, m, C, ms
