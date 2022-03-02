@@ -19,19 +19,20 @@ class SpinConfig():
 
     Examples
     --------
-    >>> myspin = SpinConfig(4)
+    >>> myspin = SpinConfig(8)
     >>> myspin.N
-    4
+    8
     >>> myspin.iMax
-    16
+    256
     """
+
     def __init__(self, N=0):
         self.N = N
         self.iMax = 2**self.N
 
     def input_decimal(self, decimal_Input):
         """Initialize spin configuration for decimal input.
-        
+
         Parameters
         ----------
         decimal_Input : integar
@@ -45,8 +46,8 @@ class SpinConfig():
         Examples
         --------
         >>> myspin = SpinConfig(8)
-        >>> myspin.input_decimal(6)
-        [0, 0, 0, 0, 0, 1, 1, 0]
+        >>> myspin.input_decimal(10)
+        [0, 0, 0, 0, 1, 0, 1, 0]
         """
         spinlist = []
         for element in bin(decimal_Input)[2:]:
@@ -59,11 +60,38 @@ class SpinConfig():
 
         return self.config
 
+    def magnetization(self):
+        """Calculate the magnetization of the spinlist.
 
+        Parameters
+        ----------
+
+        Returns
+        -------
+        m: integer
+            magnetization
+
+        Examples
+        --------
+        >>> myspin = SpinConfig(8)
+        >>> mySpin.input_decimal(10)
+        >>> mySpin.magnetization()
+        -4
+        """
+        magnet = 0
+        for eachspin in self.config:
+            if eachspin == 1:
+                magnet += 1
+            elif eachspin == 0:
+                magnet += -1
+            else:
+                print("Spin input error")
+
+        return magnet
 
     def input_p_m(self, p_m_Input):
         """Initialize spin configuration for decimal input.
-        
+
         Parameters
         ----------
         p_m_Input: string
@@ -93,28 +121,3 @@ class SpinConfig():
         self.config = spinlist2
 
         return spinlist2
-
-
-
-    def magnetization(self):
-        """Initialize spin configuration for decimal input.
-        
-        Parameters
-        ----------
-
-        Returns
-        -------
-
-        Examples
-        --------
-        """
-        magnet = 0
-        for eachspin in self.config:
-            if eachspin == 1:
-                magnet += 1
-            elif eachspin == 0:
-                magnet += -1
-            else:
-                print("Spin input error")
-
-        return magnet

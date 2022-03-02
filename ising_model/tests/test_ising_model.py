@@ -3,11 +3,9 @@ Unit and regression test for the ising_model package.
 """
 
 # Import package, test suite, and other packages as needed
-import sys
-
-import pytest
-
 import ising_model
+import pytest
+import sys
 
 
 def test1():

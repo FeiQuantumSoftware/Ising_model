@@ -67,7 +67,7 @@ class Hamiltonian():
 
         newList = self.spinlist[1:]
         newList.append(self.spinlist[0])
-        for spinx, spiny in zip(self.spinlistspinlist, newList):
+        for spinx, spiny in zip(self.spinlist, newList):
             if spinx == spiny:
                 E += -self.J * 1
             elif spinx != spiny:
