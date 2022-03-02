@@ -1,10 +1,4 @@
 """Provide the primary functions."""
-from math import exp
-
-
-def canvas2():
-
-    print("Hello, this is a test")
 
 
 def canvas(with_attribution=True):

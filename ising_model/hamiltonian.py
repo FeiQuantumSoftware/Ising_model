@@ -1,11 +1,12 @@
 """coupling Hamiltonian class def"""
 from math import exp
-from .spinconfig import SpinConfig
 import numpy as np
+from .spinconfig import SpinConfig
+
 
 class Hamiltonian():
     """Create a class of Hamiltonian of 2-d Ising model.
-        
+
     Parameters
     ----------
     J: float, optional
@@ -24,24 +25,23 @@ class Hamiltonian():
     >>>ham. J
     -2
     """
+
     def __init__(self, J=-2, u=1.1):
         self.u = u
         self.J = J
 
+    def energy(self, spinlist):
+        """Calculate the energy of a given spinconfiguration.
 
-
-    def energy(self, spinconfig):
-         """Calculate the energy of a given spinconfiguration.
-        
         Parameters
         ----------
-        spinconfig : list
+        spinlist : list
             Spin configuration represented in '1': spin up, '0': spin down.
 
         Returns
         -------
         energy : float
-            Total energy out from both the external filed and coupling from neighbor spins. 
+            Total energy out from both the external filed and coupling from neighbor spins.
 
         Examples
         --------
@@ -49,12 +49,12 @@ class Hamiltonian():
         >>>ham. energy([0,1,0,1,1])
         -4.9
         """
-        self.spinconfig = spinconfig
+        self.spinlist = spinlist
 
         E = 0
-        #Energy from the external field:
-        #H_external = Sum over i of u * spin[i]
-        for eachspin in self.spinconfig:
+        # Energy from the external field:
+        # H_external = Sum over i of u * spin[i]
+        for eachspin in self.spinlist:
             if eachspin == 1:
                 E += self.u * 1
             elif eachspin == 0:
@@ -62,12 +62,12 @@ class Hamiltonian():
             else:
                 print("Spin input error")
 
-        #Energy from coupling the nearest neighbor spin:
-        #H_c = -J/k * spin[i] * spin[i+1]
-        
-        newList = self.spinconfig[1:]
-        newList.append(self.spinconfig[0])
-        for spinx, spiny in zip(self.spinconfig, newList):
+        # Energy from coupling the nearest neighbor spin:
+        # H_c = -J/k * spin[i] * spin[i+1]
+
+        newList = self.spinlist[1:]
+        newList.append(self.spinlist[0])
+        for spinx, spiny in zip(self.spinlistspinlist, newList):
             if spinx == spiny:
                 E += -self.J * 1
             elif spinx != spiny:
@@ -77,11 +77,9 @@ class Hamiltonian():
 
         return E
 
-
-
     def average(self, T=1, N=0):
         """Calculate the oberservables of a given spin list with N sites.
-        
+
         Parameters
         ----------
         T : float, optional
@@ -112,9 +110,9 @@ class Hamiltonian():
         mm = 0
 
         for i in range(mySpin.iMax):
-            spinConfig = mySpin.input_decimal(i)
+            myspinlist = mySpin.input_decimal(i)
             mi = mySpin.magnetization()
-            Ei = self.energy(spinConfig)
+            Ei = self.energy(myspinlist)
             Zi = exp(-Ei/T)
 
             Zsum += Zi
@@ -126,7 +124,7 @@ class Hamiltonian():
         # get average energy
         E = E/Zsum
         EE = EE/Zsum
-        #get average magnetism
+        # get average magnetism
         m = m/Zsum
         mm = mm/Zsum
         # get capacity
