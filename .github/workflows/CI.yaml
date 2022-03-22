@@ -69,7 +69,7 @@ jobs:
         pytest -v --cov=ising_model --cov-report=xml --color=yes ising_model/tests/
 
     - name: CodeCov
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v2.1.0
       with:
         file: ./coverage.xml
         flags: unittests
