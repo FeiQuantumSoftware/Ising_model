@@ -10,7 +10,6 @@ dependencies:
     # Package dependencies
   - numpy
   - matplotlib
-  - c conda-forge notebook
   - mpl_toolkits
 
     # Testing
