@@ -1,13 +1,17 @@
 name: test
 channels:
-
   - conda-forge
-
   - defaults
 dependencies:
     # Base depends
   - python
   - pip
+
+    # Package dependencies
+  - numpy
+  - matplotlib
+  - c conda-forge notebook
+  - mpl_toolkits
 
     # Testing
   - pytest
