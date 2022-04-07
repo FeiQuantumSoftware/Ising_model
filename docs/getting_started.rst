@@ -17,4 +17,5 @@ Once you have these packages installed, you can install Ising_model in the same 
 
     pip install -e .
 
+
 Here, we have used asterisks (*) to create a non-numbered list, and :: followed by an indented block to indicate a code block. 
