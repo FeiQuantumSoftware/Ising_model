@@ -5,6 +5,10 @@
 
 Welcome to Ising_model's documentation!
 =========================================================
+ising_model is a Python pacckage designed to read in , perform analysis, 
+and visualize molecular coordinates. The file formats are 
+currently supported. 
+
 
 .. toctree::
    :maxdepth: 2
@@ -12,6 +16,7 @@ Welcome to Ising_model's documentation!
 
    getting_started
    api
+   about
 
 
 
